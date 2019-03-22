@@ -2,10 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport")
-
+const cors = require("cors")
 const users = require("./routes/api/users")
+const foods = require("./routes/api/foods")
 
 const app = express()
+
+app.use(cors())
 
 //body parser middleware
 app.use(
@@ -34,6 +37,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
+app.use("/api/foods", foods)
 
 //Deployment
 // ... other imports 
@@ -41,6 +45,7 @@ const path = require("path")
 
 // ... other app.use middleware 
 app.use(express.static(path.join(__dirname, "client", "build")))
+
 
 // ...
 // Right before your app.listen(), add this:
