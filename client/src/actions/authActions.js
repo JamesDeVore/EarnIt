@@ -2,7 +2,7 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
-import {GET_ERRORS, SET_CURRENT_USER, USER_LOADING} from './types'
+import {GET_ERRORS, SET_CURRENT_USER, USER_LOADING, SKIP_AUTH} from './types'
 
 //register user
 
@@ -64,5 +64,9 @@ export const logoutUser = () => dispatch => {
   setAuthToken(false)
   //dispatch an empty object to set isAuthenticated to false
   dispatch(setCurrentUser({}))
+}
+
+export const skipAuth = () => dispatch => {
+  dispatch({type:SKIP_AUTH})
 }
 

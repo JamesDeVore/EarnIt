@@ -1,4 +1,4 @@
-import {SET_CURRENT_USER, USER_LOADING} from "../actions/types"
+import {SET_CURRENT_USER, USER_LOADING, SKIP_AUTH} from "../actions/types"
 
 const isEmpty = require("is-empty")
 
@@ -19,6 +19,8 @@ export default function(state = initialState, action){
       }
     case USER_LOADING:
       return {...state, loading:true}
+    case SKIP_AUTH:
+      return {...state, isAuthenticated:true}
     default:
       return state
   }

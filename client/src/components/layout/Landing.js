@@ -1,22 +1,32 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { skipAuth, loginUser } from "../../actions/authActions";
+
+
 class Landing extends Component {
+
+  onSkip = e => {
+    // e.preventDefault();
+    const userData = {
+      email: "guest@fake.com",
+      password: "123456"
+    };
+    this.props.loginUser(userData);
+    this.props.history.push("/dashboard") // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+  };
   render() {
     return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
+      <div style={{ height: "50vh" }} className="container valign-wrapper">
         <div className="row">
           <div className="col s12 center-align">
-            <h4>
-              <b>Build</b> a login/auth app with the{" "}
-              <span style={{ fontFamily: "monospace" }}>MERN</span> stack from
-              scratch
-            </h4>
+            <h2>A silly app I made to make you EARN that Big Mac</h2>
             <p className="flow-text grey-text text-darken-1">
-              Create a (minimal) full-stack app with user authentication via
-              passport and JWTs
+              Log in to save searches, or skip to get straight to the app (Built with the MERN stack...get it?)
             </p>
+            <p>(There's no email validation or anything, its just to show I can authenticate users ;) )</p>
             <br />
             <a
-            href="/register"
+              href="/register"
               style={{
                 width: "150px",
                 borderRadius: "3px",
@@ -38,10 +48,30 @@ class Landing extends Component {
             >
               Log In
             </a>
+            <button
+              onClick={() => this.onSkip()}
+              // href="#"
+              style={{
+                marginLeft: "2rem",
+                width: "150px",
+                borderRadius: "3px",
+                letterSpacing: "1.5px"
+              }}
+              className="btn btn-large waves-effect waves-light hoverable green accent-3"
+            >
+              Skip
+            </button>
           </div>
         </div>
       </div>
     );
   }
 }
-export default Landing;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+export default connect(
+  mapStateToProps,
+  { skipAuth, loginUser }
+)(Landing);
