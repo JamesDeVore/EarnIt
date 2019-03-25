@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export default function FoodItem({item}) {
-  console.log(item)
-  let { brand_name, item_name, nf_serving_size_qty, nf_serving_size_unit} = item.fields;
+export default class FoodItem extends Component {
+  render() {
+    let { brand_name, item_name, item_id, nf_calories } = this.props.item.fields;
 
-  return (
-    <tr>
-      <th>{brand_name}</th>
-      <th>{item_name}</th>
-      <th>{nf_serving_size_qty} {nf_serving_size_unit}</th>
-    </tr>
-  )
+    return (
+
+      <tr onClick={() => this.props.selectFood(item_id)}>
+        <th>{brand_name}</th>
+        <th>{item_name}</th>
+        <th>{nf_calories}</th>
+      </tr>
+
+    );
+  }
 }

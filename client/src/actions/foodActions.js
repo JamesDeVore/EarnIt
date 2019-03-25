@@ -1,10 +1,6 @@
-import {SEARCH_PHRASE} from './types';
+import {SELECT_FOOD} from './types';
 
-// export const searchPhrase = phrase => async dispatch => {
-//   try{
-//   let phraseResults = 
-//   } catch {
-//     console.log("Error")
-//   }
-
-// }
+export const dispatchSelectFood = (foodItem) => dispatch => {
+  console.log("dispatched", foodItem)
+  dispatch({type:SELECT_FOOD, payload:foodItem})
+}

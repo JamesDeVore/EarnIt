@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
+import {dispatchSelectFood} from "../../actions/foodActions"
 import FoodItem from './FoodItem'
 
 
@@ -9,13 +10,24 @@ class Food extends Component {
     super()
     this.state = {
       phrase: "",
-      displayResults: false,
-      hits: []
+      displayHits: false,
+      hits: [],
+      selectedFood:null
     }
   }
+
+  selectFood = (itemId) => {
+    //to be passed into item component to select the correct item
+    let selectedFood = this.state.hits.find(item => {
+      return itemId === item.fields.item_id
+    })  
+    // dispatch the food to the main store
+    this.props.dispatchSelectFood(selectedFood)
+    this.setState({displayHits:false})
+  }
+
   onKeyChange = (event) => {
     this.setState({ phrase: event.target.value })
-
   }
   handleKeyPress = (event) => {
     //use this to handle submitting with enter
@@ -23,12 +35,12 @@ class Food extends Component {
   searchPhrase = async (phrase) => {
 
     let phraseResults = await fetch(
-      `/api/foods/searchByPhrase?phrase=${phrase}`
-    ).then(r => r.json());
-    this.setState({ hits: phraseResults.hits })
+      `/api/foods/searchByPhrase?phrase=${phrase}`)
+      .then(r => r.json());
+    this.setState({ hits: phraseResults.hits,renderHits:true })
   }
   renderHits = (results) => {
-    if (!results) {
+    if (!results || !this.state.renderHits) {
       return <div></div>
     }
     else {
@@ -38,12 +50,12 @@ class Food extends Component {
             <tr>
               <th>Brand Name</th>
               <th>Item Name</th>
-              <th>Serving Size</th>
+              <th>Calories</th>
             </tr>
           </thead>
           {results.map(hit => {
             return (
-              <FoodItem item={hit} key={hit.id} />
+              <FoodItem item={hit} key={hit.id} selectFood={this.selectFood} />
             )
           })}
         </table>
@@ -53,8 +65,8 @@ class Food extends Component {
   render() {
     return (
       <div>
-        <h1>First, let's find what you want to eat</h1>
-        <div>
+        <h3 className="foodTitle">First, let's find what you want to eat</h3>
+        <div className="container">
           What would you like?
           <input
             value={this.state.phrase}
@@ -82,5 +94,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  {} //search action
+  {dispatchSelectFood} //search action
 )(Food);
