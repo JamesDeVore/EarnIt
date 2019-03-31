@@ -13,7 +13,6 @@ class Location extends Component {
   getLocation =  async () => {
    await navigator.geolocation.getCurrentPosition(location => {
      
-     console.log(location.coords.latitude)
      fetch("/api/maps/findPlaces", {
        method: "post",
        headers: {
