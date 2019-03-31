@@ -5,6 +5,7 @@ const passport = require("passport")
 const cors = require("cors")
 const users = require("./routes/api/users")
 const foods = require("./routes/api/foods")
+const maps = require("./routes/api/maps")
 
 const app = express()
 
@@ -37,7 +38,8 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
-app.use("/api/foods", foods)
+app.use("/api/foods", foods);
+app.use("/api/maps" , maps)
 
 //Deployment
 // ... other imports 

@@ -37,10 +37,10 @@ class Food extends Component {
     let phraseResults = await fetch(
       `/api/foods/searchByPhrase?phrase=${phrase}`)
       .then(r => r.json());
-    this.setState({ hits: phraseResults.hits,renderHits:true })
+    this.setState({ hits: phraseResults.hits,displayHits:true })
   }
   renderHits = (results) => {
-    if (!results || !this.state.renderHits) {
+    if (!this.state.displayHits) {
       return <div></div>
     }
     else {
@@ -62,6 +62,14 @@ class Food extends Component {
       )
     }
   }
+  renderSelectedFood() {
+    if(this.props.food.fields)
+    return (
+      <div>
+        Selected food: {this.props.food.fields.item_name}
+      </div>
+    )
+  }
   render() {
     return (
       <div>
@@ -82,6 +90,7 @@ class Food extends Component {
             Clickity-Click
           </button>
           {this.renderHits(this.state.hits)}
+          {this.renderSelectedFood()}
         </div>
       </div>
     );
@@ -90,7 +99,8 @@ class Food extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
+  food:state.food
 });
 export default connect(
   mapStateToProps,
