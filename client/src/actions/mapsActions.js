@@ -19,7 +19,7 @@ export const findPlaces = (phrase,calories) => dispatch => {
       })
     })
     .then(res => res.json())
-    .then(response => dispatch({type:FIND_PLACES, payload:response}))
+    .then(response => dispatch({type:FIND_PLACES, payload:{results:response}}))
   })
 
 }

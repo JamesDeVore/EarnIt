@@ -16,30 +16,24 @@ router.post("/findPlaces", async (req, res) => {
     radius: 100
   }
   //first, get all relavent places
-  googleMapsClient.places(googleQuery).asPromise()
-  .then(allPlaces => {
-    let filteredPlaces = allPlaces.json.results.filter(async places => {
-      //first, I need to get the distance value
-      let origins = [[latitude, longitude]]
-      let destinations = [[places.geometry.location.lat, places.geometry.location.lng]]
+  let allPlaces = await googleMapsClient.places(googleQuery).asPromise()
+  let {results} = allPlaces.json
+  for (let i=0; i< results.length;i++){
+    //array methods are not async so I need to do it this way
+    let origins = [[latitude, longitude]]
+      let destinations = [[results[i].geometry.location.lat, results[i].geometry.location.lng]]
       let googleQuery = {
         origins,
         destinations
       }
-      let withinDistance = await googleMapsClient.distanceMatrix(googleQuery).asPromise()
-        .then(results => {
-          places.distanceInKm = results.json.rows[0].elements[0].distance
-          return (parseInt(calories) < (places.distanceInKm.value * 0.0621504)) //average cal / meter 
-        })
-        return withinDistance
-    })
-    filteredPlaces
+    //Add distqance prop to ech result
+     await googleMapsClient.distanceMatrix(googleQuery).asPromise()
+       .then(response => allPlaces.json.results[i].distance = response.json.rows[0].elements[0].distance)
+  }
+  let filteredResults = results.filter(place => {
+    return parseInt(calories) < (place.distance.value *0.0621504)
   })
-  //now I have an array of all places, I need to find the number that are outside the minimum range
-  //filter method wasn't working well so I have to do this roundabout way
-  
- 
-
+  res.send(filteredResults)
 
 
 })
