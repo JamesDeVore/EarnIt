@@ -1,7 +1,7 @@
 import { FIND_PLACES } from "./types";
 
 //dont need to use the redux store for this actually
-export const findPlaces = (phrase) => dispatch => {
+export const findPlaces = (phrase,calories) => dispatch => {
   console.log("findplaces  action")
 
   navigator.geolocation.getCurrentPosition(location => {
@@ -14,7 +14,8 @@ export const findPlaces = (phrase) => dispatch => {
       body: JSON.stringify({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-        phrase
+        phrase,
+        calories
       })
     })
     .then(res => res.json())

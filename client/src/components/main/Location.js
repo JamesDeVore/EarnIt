@@ -11,14 +11,22 @@ class Location extends Component {
     }
   }
   requestPlaces = () => {
-    console.log("here")
-    this.props.findPlaces(this.props.food.fields.brand_name)
+    this.props.findPlaces(this.props.food.fields.brand_name, this.props.food.fields.nf_calories)
+    navigator.geolocation.getCurrentPosition(location => {
+      let latLng = {
+        latitude:location.coords.latitude,
+        longitude:location.coords.longitude
+      }
+      this.setState({currentLocation:latLng})
+    })
   }
   renderMap = () => {
-    if(this.state.currentLocation){
-      return <Container location={this.state.currentLocation} phrase={this.props.food.fields.brand_name} />
+    if(this.state.currentLocation && this.props.maps.results){
+      return <Container location={this.state.currentLocation} phrase={this.props.food.fields.brand_name} places={this.props.maps.results}  />
 
-    }
+    } else { 
+      return <div>Loading?</div>
+       }
   }
   render() {
     console.log(this.state)
@@ -27,7 +35,7 @@ class Location extends Component {
         <button onClick={() => this.requestPlaces()}>
           TODO: get the results from the place search on to an actual map
         </button>
-        {/* {this.renderMap()} */}
+        {this.renderMap()}
       </div>
     );
   }
