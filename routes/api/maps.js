@@ -9,6 +9,7 @@ const fetch = require("node-fetch");
 
 
 router.post("/findPlaces", (req, res) => {
+  console.log("/findPLaces request", req)
   let {latitude,longitude, phrase} = req.body
   let googleQuery = {
     location:[latitude,longitude],
@@ -16,7 +17,9 @@ router.post("/findPlaces", (req, res) => {
     radius:100
   }
   googleMapsClient.places(googleQuery).asPromise()
-  .then(response => res.send(response));
+  .then(response => {
+    console.log(response)
+    res.send(response)});
 
 })
 module.exports = router

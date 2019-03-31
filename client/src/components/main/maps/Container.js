@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { GAPI_KEY } from '../../../config'
+
 
 export class MapContainer extends Component {
   

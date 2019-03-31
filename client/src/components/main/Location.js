@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
-
+import {findPlaces} from '../../actions/mapsActions'
 import Container from './maps/Container'
 
 class Location extends Component {
@@ -10,22 +10,9 @@ class Location extends Component {
       currentLocation:null
     }
   }
-  getLocation =  async () => {
-   await navigator.geolocation.getCurrentPosition(location => {
-     
-     fetch("/api/maps/findPlaces", {
-       method: "post",
-       headers: {
-         'Accept': 'application/json',
-         'Content-Type': 'application/json'
-       },
-       body: JSON.stringify({
-         latitude:location.coords.latitude,
-         longitude:location.coords.longitude,
-         phrase:this.props.food.fields.brand_name
-       })
-     })
-   })
+  requestPlaces = () => {
+    console.log("here")
+    this.props.findPlaces(this.props.food.fields.brand_name)
   }
   renderMap = () => {
     if(this.state.currentLocation){
@@ -37,19 +24,22 @@ class Location extends Component {
     console.log(this.state)
     return (
       <div>
-        <button onClick={() => this.getLocation()}>Test</button>
+        <button onClick={() => this.requestPlaces()}>
+          TODO: get the results from the place search on to an actual map
+        </button>
         {/* {this.renderMap()} */}
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors,
-  food: state.food
+  food: state.food,
+  maps:state.maps
 });
 export default connect(
   mapStateToProps,
-  null
+  {findPlaces}
 )(Location);
