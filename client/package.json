@@ -5,7 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
-    "google-maps-react": "^2.0.2",
+    "google-maps-react": "github:fullstackreact/google-maps-react",
     "jwt-decode": "^2.2.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.5",

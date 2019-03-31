@@ -22,17 +22,17 @@ class Location extends Component {
   }
   renderMap = () => {
     if(this.state.currentLocation && this.props.maps.results){
+      console.log(this.props.food)
       return <Container location={this.state.currentLocation} phrase={this.props.food.fields.brand_name} places={this.props.maps.results}  />
 
     } else { 
-      return <div>Loading?</div>
+      return <div></div>
        }
   }
   render() {
-    console.log(this.state)
     return (
-      <div>
-        <button onClick={() => this.requestPlaces()}>
+      <div className="">
+        <button className="btn" onClick={() => this.requestPlaces()}>
           TODO: get the results from the place search on to an actual map
         </button>
         {this.renderMap()}
