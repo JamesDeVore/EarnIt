@@ -1,4 +1,6 @@
-const { GAPI_KEY } = require("../../GAPIKey")
+require("dotenv").config();
+
+const GAPI_KEY = process.env.GAPI_KEY
 const googleMapsClient = require("@google/maps").createClient({
   key: GAPI_KEY,
   Promise,
@@ -6,6 +8,7 @@ const googleMapsClient = require("@google/maps").createClient({
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
+
 
 
 router.post("/findPlaces", async (req, res) => {

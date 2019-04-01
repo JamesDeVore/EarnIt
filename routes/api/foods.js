@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch")
+require("dotenv").config();
 
 //routes to find the food item based on a query, 
 //then find by ID
 
 //api credentials
-const {appId, appKey} = require("../../NTKeys")
+const appId = process.env.APP_ID
+const appKey = process.env.APP_KEY
 const creds = `&appId=${appId}&appKey=${appKey}`
 
 router.get("/searchByPhrase", (req,res) => {
