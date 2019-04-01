@@ -2,10 +2,9 @@ import React, { Component, Fragment } from 'react'
 import { Map, InfoWindow, Circle, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { BounceLoader } from 'react-spinners'
 
-const GAPI_KEY = process.env.GAPI_KEY
+const GAPI_KEY = process.env.REACT_APP_GAPI
 
 export class MapContainer extends Component {
-  console.log(GAPI_KEY)
   renderMap = () => {
     if(this.props.places[0]){
 
