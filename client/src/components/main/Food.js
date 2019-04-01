@@ -66,17 +66,19 @@ class Food extends Component {
     if(this.props.food.fields)
     return (
       <div>
-        Selected food: {this.props.food.fields.item_name}
+        <h4 className="center-align">Selected:</h4>
+        <h5> {this.props.food.fields.brand_name} {this.props.food.fields.item_name}</h5>
       </div>
-    )
+    );
   }
   render() {
     return (
-      <div>
+      <div className="col s10 offset-s1">
         <h3 className="foodTitle">First, let's find what you want to eat</h3>
-        <div className="container">
+        <div className="">
           What would you like?
           <input
+            className="hoverable"
             value={this.state.phrase}
             onChange={e => this.onKeyChange(e)}
             onKeyPress={e => this.handleKeyPress(e)}
@@ -87,7 +89,7 @@ class Food extends Component {
             className="waves-effect waves-light btn"
             onClick={() => this.searchPhrase(this.state.phrase)}
           >
-            Clickity-Click
+            Search for food<i className="material-icons right">fastfood</i>
           </button>
           {this.renderHits(this.state.hits)}
           {this.renderSelectedFood()}

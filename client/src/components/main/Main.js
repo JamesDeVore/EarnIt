@@ -10,20 +10,24 @@ class Main extends Component {
     super()
     this.state = {
       phrase:"",
-      selectedFood:null,
-      location:{}
-
+      selectedFood:null
     }
   }
   render() {
     return (
-      <div>
-        This is going to be the main part of the whole app
-        <div>
+      <div className="container">
+      <div className="row">
+      <h2>How it works:</h2>
+      <p className="flow-text">Enter the food you want to eat, and we find restaraunts 
+      that are far enough away that you will burn the calories walking there that you will 
+      get from eating the food!</p>
+      <p>I need a better way to word that</p>
+      </div>
+        <div className="row">
           <Food />
         </div>
-        <div>
-          <Location />
+        <div className="row">
+          {this.props.food._id ? <Location />:<div></div>}
         </div>
       </div>
     )

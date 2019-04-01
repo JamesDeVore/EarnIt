@@ -1,3 +1,8 @@
 .foodTitle {
   text-align: center;
 }
+.mapContainer {
+  max-width:300px !important;
+  background-color: green;
+}
+

@@ -29,7 +29,7 @@ class Dashboard extends Component {
                 marginTop: "1rem",
                 marginRight:"1rem"
               }} className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-              >Get Started!</button></Link>
+              >New Search!</button></Link>
             <button
               style={{
                 width: "150px",

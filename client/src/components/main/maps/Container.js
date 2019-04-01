@@ -1,11 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Map, InfoWindow, Circle, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { GAPI_KEY } from '../../../config'
+import { BounceLoader } from 'react-spinners'
+
 
 
 export class MapContainer extends Component {
   
   renderMap = () => {
+    if(this.props.places[0]){
+
     let initalCenter = {
       lat: this.props.location.latitude,
       lng: this.props.location.longitude
@@ -16,23 +20,29 @@ export class MapContainer extends Component {
       let latLng = { lat: location.lat, lng: location.lng }
       return <Marker position={latLng} name={name} title={name} key={id} />
     })
-    console.log(markers[0], <Marker position={initalCenter} />)
+    const style = {
+      width:'80%',
+      height:'100%',
+    }
     return (
-      <div className="">
-        <div id="map" />
+      <div className="mapContainer">
         <Map
           google={this.props.google}
           zoom={13}
           initialCenter={initalCenter}
+          style={style}
         >
-        {markers}
+          {markers}
         </Map>
       </div>
     );
+  } else {
+    return <div className="col s4 offset-4"><BounceLoader size={150} sizeUnit={'px'} color={'#ffa500'} /></div>
   }
+}
 
   render() {
-    return <div>{this.renderMap()}</div>
+    return <Fragment>{this.renderMap()}</Fragment>;
   }
 }
 

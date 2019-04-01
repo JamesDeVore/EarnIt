@@ -19,11 +19,23 @@ class Landing extends Component {
       <div style={{ height: "50vh" }} className="container valign-wrapper">
         <div className="row">
           <div className="col s12 center-align">
-            <h2>A silly app I made to make you EARN that Big Mac</h2>
-            <p className="flow-text grey-text text-darken-1">
-              Log in to save searches, or skip to get straight to the app (Built with the MERN stack...get it?)
+            <h3>
+              <i className="material-icons">whatshot</i> EARN that Big Mac{" "}
+              <i className="material-icons">whatshot</i>
+            </h3>
+            <p className="flow-text">
+              Search for food, find restaraunts that let you burn the
+              calories walking there
             </p>
-            <p>(There's no email validation or anything, its just to show I can authenticate users ;) )</p>
+            <p className="flow-text grey-text text-darken-1">
+              Log in to save searches, or skip to get straight to the app
+              (Built with the MERN stack...get it?)
+            </p>
+
+            <p>
+              (There's no email validation or anything, its just to show I
+              can authenticate users ;) )
+            </p>
             <br />
             <a
               href="/register"
