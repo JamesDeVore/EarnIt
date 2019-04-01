@@ -16,7 +16,7 @@ class Landing extends Component {
   };
   render() {
     return (
-      <div style={{ height: "50vh" }} className="container valign-wrapper">
+      <div style={{ height: "50vh" }} className="container">
         <div className="row">
           <div className="col s12 center-align">
             <h3>
@@ -37,42 +37,46 @@ class Landing extends Component {
               can authenticate users ;) )
             </p>
             <br />
-            <a
-              href="/register"
-              style={{
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px"
-              }}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            >
-              Register
-            </a>
-            <a
-              href="/login"
-              style={{
-                marginLeft: "2rem",
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px"
-              }}
-              className="btn btn-large waves-effect white hoverable black-text"
-            >
-              Log In
-            </a>
-            <button
-              onClick={() => this.onSkip()}
-              // href="#"
-              style={{
-                marginLeft: "2rem",
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px"
-              }}
-              className="btn btn-large waves-effect waves-light hoverable green accent-3"
-            >
-              Skip
-            </button>
+            <div className="startButtons">
+              <a 
+                href="/register"
+                style={{
+                  width: "150px",
+                  borderRadius: "3px",
+                  letterSpacing: "1.5px"
+                }}
+                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+              >
+                Register
+              </a>
+
+              <a 
+                href="/login"
+                style={{
+                  marginLeft: "2rem",
+                  width: "150px",
+                  borderRadius: "3px",
+                  letterSpacing: "1.5px"
+                }}
+                className="btn btn-large waves-effect white hoverable black-text"
+              >
+                Log In
+              </a>
+              <button
+                className="skip"
+                onClick={() => this.onSkip()}
+                // href="#"
+                style={{
+                  marginLeft: "2rem",
+                  width: "150px",
+                  borderRadius: "3px",
+                  letterSpacing: "1.5px"
+                }}
+                className="btn btn-large waves-effect waves-light hoverable green accent-3"
+              >
+                Skip
+              </button>
+            </div>
           </div>
         </div>
       </div>
