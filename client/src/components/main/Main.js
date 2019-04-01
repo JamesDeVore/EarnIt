@@ -14,7 +14,6 @@ class Main extends Component {
     }
   }
   render() {
-    console.log(process.env)
     return (
       <div className="container">
       <div className="row">

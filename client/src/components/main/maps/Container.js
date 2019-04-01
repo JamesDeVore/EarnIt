@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Map, InfoWindow, Circle, Marker, GoogleApiWrapper } from 'google-maps-react';
-import { GAPI_KEY } from '../../../config'
 import { BounceLoader } from 'react-spinners'
 
-
+const GAPI_KEY = process.env.GAPI_KEY
 
 export class MapContainer extends Component {
   
